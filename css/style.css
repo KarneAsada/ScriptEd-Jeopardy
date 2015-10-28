@@ -3,9 +3,14 @@ body{
 	color: #fff;
 }
 
+.categories div{
+	height: 10vh;
+}
+
 .question{
 	background-color: blue;
-	margin: 15px;
+	height: 15vh;
+	margin-top: 2vh;
 }
 
 .answer{
