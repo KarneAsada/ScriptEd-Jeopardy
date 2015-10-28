@@ -4,11 +4,12 @@ body {
 	font-family: Oswald, Impact, 'Arial Black', sans-serif;
 }
 
-.board > .row {
+.board > .row,
+.questions > .row {
     height: 16.666666666vh;
 }
 
-.question,
+.questions > .row > div,
 .categories > div {
     height: 100%;
     background-color: #00c;
@@ -17,7 +18,7 @@ body {
     display: table;
 }
 
-.question:hover{
+.questions > .row > div:hover {
 	border-color: #fc0;
 	cursor: pointer;
 }
@@ -54,7 +55,7 @@ body {
     transition-duration: 2s;
 }
 
-.active p{
+.active p {
 	background-color: #00c;
 	height: 80vh;
 	margin-top: 10vh;
@@ -63,9 +64,3 @@ body {
 	padding: 10vh;
 	text-shadow: 2px 2px 3px #000;
 }
-
-
-
-
-
-

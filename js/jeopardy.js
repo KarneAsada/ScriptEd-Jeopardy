@@ -6,24 +6,31 @@
 $(document).ready(function () {
     'use strict';
 
-    var teams = {
-        teamOne: {
-            name: "",
-            score: 0
-        },
-        teamTwo: {
-            name: "",
-            score: 0
-        }
+    var gameData = {
+        valueMultiplier: 1,
+        teams: [
+            {
+                name: "",
+                score: 0
+            },
+            {
+                name: "",
+                score: 0
+            }
+        ]
     };
 
-    $('.question').on('click', function () {
-        var value = $(this).children('.value')[0];
+    $('.questions > .row > div').each(function () {
+        var points = ($('.questions > .row').index($(this).parent()) + 1) * gameData.valueMultiplier * 100;
+        $(this).children('.value').text('$' + points);
+    }).on('click', function () {
         var answer = $(this).children('.answer')[0];
-        var points = answer.getAttribute('data-points');
-        $(value).toggle();
-        $(answer).toggle();
-        $(answer).toggleClass('active');
+        var points = ($('.questions > .row').index($(this).parent()) + 1) * gameData.valueMultiplier * 100;
+
+        $(answer).toggle().toggleClass('active');
+
+        console.log(points);
+
         $(this).off('click');
     });
 
