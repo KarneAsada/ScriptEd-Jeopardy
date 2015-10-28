@@ -1,25 +1,43 @@
-body{
-	background-color: #000;
-	color: #fff;
+body {
+    background-color: #000;
+    color: #fff;
 }
 
-.categories div{
-	height: 10vh;
-	display: block;
+.board > .row {
+    height: 16.666666666vh;
 }
 
-.question{
-	background-color: blue;
-	height: 15vh;
-	margin-top: 2vh;
-	display: block;
+.question,
+.categories > div {
+    height: 100%;
+    background-color: #00c;
+    border: 2px solid #000;
+    text-align: center;
+    display: table;
 }
 
-.answer{
-	display: none;
+.answer {
+    display: none;
 }
 
-.active{
+.category-name, .value {
+    display: table-cell;
+    vertical-align: middle;
+	font-family: Oswald, Impact, 'Arial Black', sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.category-name {
+	font-size: 24px;
+}
+
+.value {
+	color: #fc0;
+	font-size: 36px;
+}
+
+.active {
 	background-color: purple;
 	position: fixed;
 	top: 0;
@@ -32,7 +50,3 @@ body{
 	-webkit-transition-duration: 2s;
     transition-duration: 2s;
 }
-
-
-
-
