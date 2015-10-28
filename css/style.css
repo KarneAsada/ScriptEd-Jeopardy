@@ -23,9 +23,6 @@ body {
 .category-name, .value {
     display: table-cell;
     vertical-align: middle;
-}
-
-.category-name, .value {
 	font-family: Oswald, Impact, 'Arial Black', sans-serif;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -38,4 +35,18 @@ body {
 .value {
 	color: #fc0;
 	font-size: 36px;
+}
+
+.active {
+	background-color: purple;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	height: 90vh;
+	margin-top: 5vh;
+	width: 90vw;
+	margin-left: 5vw;
+	-webkit-transition-duration: 2s;
+    transition-duration: 2s;
 }
