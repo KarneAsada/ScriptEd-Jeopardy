@@ -2,6 +2,7 @@ body {
     background-color: #000;
     color: #fff;
 	font-family: Oswald, Impact, 'Arial Black', sans-serif;
+    text-align: center;
 }
 
 .board > .row {
@@ -13,7 +14,6 @@ body {
     height: 100%;
     background-color: #00c;
     border: 2px solid #000;
-    text-align: center;
     display: table;
 }
 
@@ -22,7 +22,7 @@ body {
 	cursor: pointer;
 }
 
-.answer {
+.answer, .scoreboard {
     display: none;
 }
 
@@ -62,6 +62,35 @@ body {
 	margin-left: 10vw;
 	padding: 10vh;
 	text-shadow: 2px 2px 3px #000;
+}
+
+.scoreboard{
+	background-color: #000;
+	position: fixed;
+	height: 80vh;
+	top: 10vh;
+	width: 80vw;
+	left: 10vw;
+	z-index: 11;
+}
+
+table{
+	width: 100%;
+}
+
+.avatars img{
+	max-height: 20vh;
+	width: auto;
+}
+
+.scores td{
+	border-top: 2px solid #fff;
+}
+
+.teams td, .scores td{
+	color: #fff;
+	background-color: #00c;
+	border: 2px solid #000;
 }
 
 

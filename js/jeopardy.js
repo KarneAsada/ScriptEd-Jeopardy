@@ -19,10 +19,20 @@ function main(){
 		var points = answer.getAttribute('data-points');
 		$(value).toggle();
 		$(answer).toggle();
-		// console.log('points:', points);
 		$(answer).toggleClass('active');
 	});
+
+	$(document).keypress(function(key){
+		if (key.which === 115){
+			$('.scoreboard').toggle();
+		}
+	})
 };
 
 
 $(document).ready(main);
+
+
+
+
+
