@@ -19,6 +19,7 @@ body {
 
 .question:hover{
 	border-color: #fc0;
+	cursor: pointer;
 }
 
 .answer {
