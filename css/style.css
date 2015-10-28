@@ -25,9 +25,17 @@ body {
     vertical-align: middle;
 }
 
-.category-name {
+.category-name, .value {
 	font-family: Oswald, Impact, 'Arial Black', sans-serif;
 	font-weight: 700;
 	text-transform: uppercase;
+}
+
+.category-name {
 	font-size: 24px;
+}
+
+.value {
+	color: #fc0;
+	font-size: 36px;
 }
