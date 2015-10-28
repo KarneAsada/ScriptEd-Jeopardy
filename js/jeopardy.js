@@ -1,38 +1,44 @@
 // https://www.youtube.com/watch?v=BM4GPPhpLYU
 // use bootstrap for columns & rows.
 
-function main(){
-	var teams = {
-		teamOne: {
-			name: "",
-			score: 0
-		},
-		teamTwo: {
-			name: "",
-			score: 0
-		}
-	};
+/*global $ */
+$(document).ready(function () {
+    'use strict';
 
-	$('.question').click(function(){
-		var value = $(this).children('.value')[0];
-		var answer = $(this).children('.answer')[0];
-		var points = answer.getAttribute('data-points');
-		$(value).toggle();
-		$(answer).toggle();
-		$(answer).toggleClass('active');
-	});
+    var gameData = {
+        valueMultiplier: 1,
+        teams: [
+            {
+                name: "",
+                score: 0
+            },
+            {
+                name: "",
+                score: 0
+            }
+        ]
+    };
 
 	$(document).keypress(function(key){
 		if (key.which === 115){
 			$('.scoreboard').toggle();
 		}
 	})
-};
 
 
-$(document).ready(main);
+    $('.questions > .row > div').each(function () {
+        var points = ($('.questions > .row').index($(this).parent()) + 1) * gameData.valueMultiplier * 100;
+        $(this).children('.value').text('$' + points);
+    }).on('click', function () {
+        var answer = $(this).children('.answer')[0];
+        var points = ($('.questions > .row').index($(this).parent()) + 1) * gameData.valueMultiplier * 100;
 
+        $(answer).toggle().toggleClass('active');
 
+        console.log(points);
+    });
+
+});
 
 
 
