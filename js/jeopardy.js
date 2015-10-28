@@ -6,10 +6,10 @@ function main(){
 	$('.question').click(function(){
 		var value = $(this).children('.value')[0];
 		var answer = $(this).children('.answer')[0];
-		value.hide();
-		$(answer).show();
-		console.log('value: ', value);
-		console.log('answer: ', answer);
+		$(value).toggle();
+		$(answer).toggle();
+		// console.log('value: ', value);
+		// console.log('answer: ', answer);
 	})
 };
 

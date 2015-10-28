@@ -1,0 +1,33 @@
+body {
+    background-color: #000;
+    color: #fff;
+}
+
+.board > .row {
+    height: 16.666666666vh;
+}
+
+.question,
+.categories > div {
+    height: 100%;
+    background-color: #00c;
+    border: 2px solid #000;
+    text-align: center;
+    display: table;
+}
+
+.answer {
+    display: none;
+}
+
+.category-name, .value {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.category-name {
+	font-family: Oswald, Impact, 'Arial Black', sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 24px;
+}
