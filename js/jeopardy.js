@@ -9,8 +9,6 @@ function main(){
 		$(value).toggle();
 		$(answer).toggle();
 		$(answer).toggleClass('active');
-		// console.log('value: ', value);
-		// console.log('answer: ', answer);
 	})
 };
 

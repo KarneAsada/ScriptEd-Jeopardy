@@ -1,6 +1,7 @@
 body {
     background-color: #000;
     color: #fff;
+	font-family: Oswald, Impact, 'Arial Black', sans-serif;
 }
 
 .board > .row {
@@ -16,6 +17,10 @@ body {
     display: table;
 }
 
+.question:hover{
+	border-color: #fc0;
+}
+
 .answer {
     display: none;
 }
@@ -23,12 +28,11 @@ body {
 .category-name, .value {
     display: table-cell;
     vertical-align: middle;
-	font-family: Oswald, Impact, 'Arial Black', sans-serif;
 	font-weight: 700;
 	text-transform: uppercase;
 }
 
-.category-name {
+.category-name, .active p {
 	font-size: 24px;
 }
 
@@ -38,15 +42,29 @@ body {
 }
 
 .active {
-	background-color: purple;
+	background-color: rgba(0, 0, 0, 0.5);
 	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 10;
-	height: 90vh;
-	margin-top: 5vh;
-	width: 90vw;
-	margin-left: 5vw;
+	height: 100vh;
+	width: 100vw;
 	-webkit-transition-duration: 2s;
     transition-duration: 2s;
 }
+
+.active p{
+	background-color: #00c;
+	height: 80vh;
+	margin-top: 10vh;
+	width: 80vw;
+	margin-left: 10vw;
+	padding: 10vh;
+	text-shadow: 2px 2px 3px #000;
+}
+
+
+
+
+
+
