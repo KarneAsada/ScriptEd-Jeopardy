@@ -8,7 +8,8 @@ function main(){
 		var answer = $(this).children('.answer')[0];
 		$(value).toggle();
 		$(answer).toggle();
-		$(answer).toggleClass('active');
+		console.log(this);
+		$(this).toggleClass('active');
 		// console.log('value: ', value);
 		// console.log('answer: ', answer);
 	})
