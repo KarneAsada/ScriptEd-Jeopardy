@@ -59,7 +59,7 @@ $(document).ready(function () {
     // Scoreboard
 
 	$(document).keypress(function(key){
-		if (key.which === 115){
+		if (key.which === 115 && $('.preGame')[0].style.display === "none"){
 			$('.scoreboard').toggle();
 		}
 	})
