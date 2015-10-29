@@ -7,16 +7,7 @@ $(document).ready(function () {
 
     var gameData = {
         valueMultiplier: 1,
-        teams: [
-            {
-                name: "",
-                score: 0
-            },
-            {
-                name: "",
-                score: 0
-            }
-        ]
+        teams: []
     };
 
 
@@ -37,6 +28,7 @@ $(document).ready(function () {
 
     $('.addTeam').click(function(){
     	$('.teamNames').append('<input type="text" class="name" maxlength="10">');
+    	$('.name:last-child').focus();
     	if ($('.name').length === 6){
     		$(this).hide();
     	}
