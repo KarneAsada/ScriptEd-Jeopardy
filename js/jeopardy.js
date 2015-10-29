@@ -19,12 +19,6 @@ $(document).ready(function () {
         ]
     };
 
-	$(document).keypress(function(key){
-		if (key.which === 115){
-			$('.scoreboard').toggle();
-		}
-	})
-
 
     $('.questions > .row > div').each(function () {
         var points = ($('.questions > .row').index($(this).parent()) + 1) * gameData.valueMultiplier * 100;
@@ -38,7 +32,59 @@ $(document).ready(function () {
         console.log(points);
     });
 
+
+    // Scoreboard
+
+	$(document).keypress(function(key){
+		if (key.which === 115){
+			$('.scoreboard').toggle();
+		}
+	})
+
+    var fonts = [
+	  "'Indie Flower', cursive",
+	  "'Shadows Into Light', cursive",
+	  "'Pacifico', cursive",
+	  "'Amatic SC', cursive",
+	  "'Architects Daughter', cursive",
+	  "'Gloria Hallelujah', cursive",
+	  "'Covered By Your Grace', cursive",
+	  "'Kaushan Script', cursive",
+	  "'Coming Soon', cursive",
+	  "'Shadows Into Light Two', cursive"
+	]
+
+	var teamIcons = ['bluetoy.png', 'firetoy.png', 'greentoy.png', 'lilastoy.png', 'masktoy.png', 'orangetoy.png', 'pinktoy.png', 'redtoy.png', 'toothtoy.png', 'yellowtoy.png']
+
+    function randomize(arr){
+		var current = Math.floor(Math.random()*arr.length);
+		var chosen = arr[current];
+		arr.splice(current, 1);
+		return chosen;
+	};
+
+	var sampleTeams = ['Rob', 'Cole', 'awesome', 'rulers', 'coolio', 'winner']
+
+	function createTeams(){
+		for (var x = 0; x < sampleTeams.length; x++){
+			var teamObj = {
+				name: sampleTeams[x],
+				score: 0,
+			};
+			gameData.teams.push(teamObj);
+			$('.avatars').append('<td><img src="images/' +randomize(teamIcons)+ '"></td>')
+			$('.scores').append('<td>'+teamObj.score+'</td>')
+			var teamName = $('<td>' + sampleTeams[x] + '</td>').css('font-family', randomize(fonts));
+			$('.teams').append(teamName);
+		}
+	}
+
+	createTeams();
+
+
 });
+
+
 
 
 

@@ -1,3 +1,5 @@
+
+
 body {
     background-color: #000;
     color: #fff;
@@ -23,7 +25,7 @@ body {
 	cursor: pointer;
 }
 
-.answer, .scoreboard {
+.answer{
     display: none;
 }
 
@@ -66,35 +68,50 @@ body {
 }
 
 .scoreboard{
-	background-color: #000;
+	background-color: rgba(0, 0, 0, 0.5);
 	position: fixed;
-	height: 80vh;
-	top: 10vh;
-	width: 80vw;
-	left: 10vw;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
 	z-index: 11;
 }
 
-table{
-	width: 100%;
-}
+	table{
+		display: none;
+		width: calc(80vw - 4vh);
+		background-color: #000;
+		background-image: url('../images/gradient.png');
+		background-position: center bottom;
+		background-size: 100vw 45vh;
+		background-repeat: no-repeat;
+		margin-left: 10vw;
+		margin-top: 15vh;
+	}
 
-.avatars img{
-	max-height: 20vh;
-	width: auto;
-}
+	.avatars img{
+		max-height: 20vh;
+		width: auto;
+		margin-top: 2.5vh;
+		margin-bottom: 2.5vh;
+	}
 
-.scores td{
-	border-top: 2px solid #fff;
-}
+	.scores td, .teams td{
+		border: 5px solid #000;
+		color: #fff;
+	}
 
-.teams td, .scores td{
-	color: #fff;
-	background-color: #00c;
-	border: 2px solid #000;
-}
+	.scores td{
+		border-top-color: #fff;
+		height: 15vh;
+		margin-bottom: 5vh;
+		font-size: 20px;
+	}
 
-
+	.teams td{
+		height: 30vh;
+		font-size: 8vmin;
+	}
 
 
 
