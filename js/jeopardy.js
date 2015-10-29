@@ -7,16 +7,7 @@ $(document).ready(function () {
 
     var gameData = {
         valueMultiplier: 1,
-        teams: [
-            {
-                name: "",
-                score: 0
-            },
-            {
-                name: "",
-                score: 0
-            }
-        ]
+        teams: []
     };
 
 
@@ -33,10 +24,34 @@ $(document).ready(function () {
     });
 
 
+    // Greeting View
+
+    $('.addTeam').click(function(){
+    	$('.teamNames').append('<input type="text" class="name" maxlength="10">');
+    	$('.name:last-child').focus();
+    	if ($('.name').length === 6){
+    		$(this).hide();
+    	}
+    });
+
+    $('.makeTeams').click(function(){
+    	var teamNames = $('.name').map(function(team){
+    		if ($('.name')[team].value){
+	    		return $('.name')[team].value;
+    		}
+    	});
+    	if (teamNames.length){
+	    	createTeams(teamNames);
+	    	$('.preGame').hide();
+	    	$('.scoreboard').toggle();
+    	}
+    });
+
+
     // Scoreboard
 
 	$(document).keypress(function(key){
-		if (key.which === 115){
+		if (key.which === 115 && $('.preGame')[0].style.display === "none"){
 			$('.scoreboard').toggle();
 		}
 	})
@@ -63,23 +78,19 @@ $(document).ready(function () {
 		return chosen;
 	};
 
-	var sampleTeams = ['Rob', 'Cole', 'awesome', 'rulers', 'coolio', 'winner']
-
-	function createTeams(){
-		for (var x = 0; x < sampleTeams.length; x++){
+	function createTeams(arr){
+		for (var x = 0; x < arr.length; x++){
 			var teamObj = {
-				name: sampleTeams[x],
+				name: arr[x],
 				score: 0,
 			};
 			gameData.teams.push(teamObj);
-			$('.avatars').append('<td><img src="images/' +randomize(teamIcons)+ '"></td>')
+			$('.avatars').append('<td><img src="images/' +randomize(teamIcons)+ '" title='+ arr[x] +'></td>')
 			$('.scores').append('<td>'+teamObj.score+'</td>')
-			var teamName = $('<td>' + sampleTeams[x] + '</td>').css('font-family', randomize(fonts));
+			var teamName = $('<td>' + arr[x] + '</td>').css('font-family', randomize(fonts));
 			$('.teams').append(teamName);
 		}
 	}
-
-	createTeams();
 
 
 });

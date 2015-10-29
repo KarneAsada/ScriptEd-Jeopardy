@@ -25,18 +25,21 @@ body {
 	cursor: pointer;
 }
 
-.answer{
+.answer,
+.scoreboard{
     display: none;
 }
 
-.category-name, .value {
+.category-name,
+.value {
     display: table-cell;
     vertical-align: middle;
 	font-weight: 700;
 	text-transform: uppercase;
 }
 
-.category-name, .active p {
+.category-name,
+.active p {
 	font-size: 24px;
 }
 
@@ -67,7 +70,8 @@ body {
 	text-shadow: 2px 2px 3px #000;
 }
 
-.scoreboard{
+.scoreboard,
+.preGame{
 	background-color: rgba(0, 0, 0, 0.5);
 	position: fixed;
 	top: 0;
@@ -77,8 +81,33 @@ body {
 	z-index: 11;
 }
 
+	.teamMaker{
+		width: calc(80vw - 4vh);
+		background-color: #000;
+		height: 70vh;
+		margin-left: 10vw;
+		margin-top: 15vh;
+		padding: 15px;
+	}
+
+		.teamMaker input{
+			display: block;
+			margin: auto;
+			margin-bottom: 10px;
+			color: #000;
+		}
+		
+		.addTeam{
+			margin: auto;
+			border-radius: 15px;
+			background-color: #00c;
+			color: #fc0;
+			height: 25px;
+			width: 25px;
+			font-size: 15px;
+		}
+
 	table{
-		display: none;
 		width: calc(80vw - 4vh);
 		background-color: #000;
 		background-image: url('../images/gradient.png');
@@ -89,28 +118,36 @@ body {
 		margin-top: 15vh;
 	}
 
-	.avatars img{
-		max-height: 20vh;
-		width: auto;
-		margin-top: 2.5vh;
-		margin-bottom: 2.5vh;
-	}
+		.avatars img{
+			max-height: 20vh;
+			width: auto;
+			margin-top: 2.5vh;
+			margin-bottom: 2.5vh;
+		}
 
-	.scores td, .teams td{
-		border: 5px solid #000;
-		color: #fff;
-	}
+		.scores td,
+		.teams td{
+			border: 5px solid #000;
+			color: #fff;
+		}
 
-	.scores td{
-		border-top-color: #fff;
-		height: 15vh;
-		margin-bottom: 5vh;
-		font-size: 20px;
-	}
+		.scores td{
+			border-top-color: #fff;
+			height: 15vh;
+			margin-bottom: 5vh;
+			font-size: 20px;
+		}
 
-	.teams td{
-		height: 30vh;
-		font-size: 8vmin;
+		.teams td{
+			height: 30vh;
+			font-size: 8vmin;
+		}
+	.scoreboard h3{
+		background-color: #000;
+		width: 50vw;
+		margin-left: 25vw;
+		padding-top: 10px;
+		padding-bottom: 10px;
 	}
 
 
