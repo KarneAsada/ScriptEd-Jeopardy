@@ -113,7 +113,9 @@
         $('.team-names').on('submit', function (e) {
             e.preventDefault();
             var teamNames = $('.team-names input[type="text"]').map(function (index, element) {
-                return $(element).val();
+                if ($(element).val() !== '') {
+                    return $(element).val();
+                }
             });
 
             if (teamNames.length) {
