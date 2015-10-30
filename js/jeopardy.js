@@ -132,7 +132,7 @@
             if (gameData.teams[teamNumber].score < 0) {
                 $('.scoreboard-score').eq(teamNumber).addClass('negative');
             } else {
-                $('.scoreboard-score').eq(teamNumber).removClass('negative');
+                $('.scoreboard-score').eq(teamNumber).removeClass('negative');
             }
 
             if ($(this).hasClass('btn-success')) {
