@@ -1,101 +1,175 @@
-// https://www.youtube.com/watch?v=BM4GPPhpLYU
-// use bootstrap for columns & rows.
-
 /*global $ */
-$(document).ready(function () {
+(function () {
     'use strict';
 
-    var gameData = {
-        valueMultiplier: 1,
-        teams: []
-    };
+    $(document).ready(function () {
+        var gameData = {
+            valueMultiplier: 1,
+            teams: []
+        };
 
+        var teamStyles = {
+            fonts: [
+                "'Indie Flower', cursive",
+                "'Shadows Into Light', cursive",
+                "'Pacifico', cursive",
+                "'Amatic SC', cursive",
+                "'Architects Daughter', cursive",
+                "'Gloria Hallelujah', cursive",
+                "'Covered By Your Grace', cursive",
+                "'Kaushan Script', cursive",
+                "'Coming Soon', cursive",
+                "'Shadows Into Light Two', cursive"
+            ],
+            avatars: [
+                'bluetoy.png',
+                'firetoy.png',
+                'greentoy.png',
+                'lilastoy.png',
+                'masktoy.png',
+                'orangetoy.png',
+                'pinktoy.png',
+                'redtoy.png',
+                'toothtoy.png',
+                'yellowtoy.png'
+            ]
+        };
 
-    $('.questions > .row > div').each(function () {
-        var points = ($('.questions > .row').index($(this).parent()) + 1) * gameData.valueMultiplier * 100;
-        $(this).children('.value').text('$' + points);
-    }).on('click', function () {
-        var answer = $(this).children('.answer')[0];
-        var points = ($('.questions > .row').index($(this).parent()) + 1) * gameData.valueMultiplier * 100;
+        var getRandomArrayElement = function (array) {
+            return array[Math.floor(Math.random() * array.length)];
+        };
 
-        $(answer).toggle().toggleClass('active');
+        var createTeams = function (teamNames) {
+            var x;
+            var teamHTML;
 
-        console.log(points);
+            for (x = 0; x < teamNames.length; x += 1) {
+
+                gameData.teams.push({
+                    name: teamNames[x],
+                    score: 0
+                });
+
+                teamHTML = $('<div class="scoreboard-team"></div>');
+
+                teamHTML.append(
+                    '<div class="scoreboard-avatar"><img src="img/'
+                        + getRandomArrayElement(teamStyles.avatars)
+                        + '" alt="' + teamNames[x] + '"></div>'
+                );
+                teamHTML.append('<div class="scoreboard-score">$0</div>');
+                teamHTML.append(
+                    $('<div class="scoreboard-name">' + teamNames[x] + '</div>')
+                        .css('font-family', getRandomArrayElement(teamStyles.fonts))
+                );
+
+                $('.scoreboard-teams').append(teamHTML);
+
+                teamHTML = $('<div class="scoring-buttons-team"></div>');
+                teamHTML.append('<div class="scoring-buttons-name">' + teamNames[x] + '</div>');
+                teamHTML.append('<div class="btn-group" role="group"><button type="button" class="btn btn-success" title="Right!"><span class="glyphicon glyphicon-ok"></span></button><button type="button" class="btn btn-danger" title="Wrong!"><span class="glyphicon glyphicon-remove"></span></button></div>');
+                $('.question-viewer .scoring-buttons').append(teamHTML);
+            }
+        };
+
+        $('.game-board td').each(function () {
+            var dollarValue = ($('.game-board > tbody > tr').index($(this).parent()) + 1) * gameData.valueMultiplier * 100;
+            $(this).children('.value').text('$' + dollarValue);
+
+            $(this).on('click', function () {
+                var questionText = $(this).children('.question').text();
+                var answerText = $(this).children('.answer').text();
+
+                $(this).children('.value').hide();
+                $('.bg-modal').show();
+                $('.question-viewer .question-text').text(questionText);
+                $('.question-viewer .answer-text').html('Answer:<br>' + answerText);
+                $('.question-viewer').data('dollar-value', dollarValue);
+                $('.question-viewer').show();
+
+                $(this).addClass('asked').off('click');
+            });
+        });
+
+        // Greeting View
+        $('.add-team').on('click', function (e) {
+            e.preventDefault();
+            var formGroup = $(this).prev().clone();
+
+            formGroup.find('input').val('');
+            $(this).before(formGroup);
+
+            $('.team-names input').last().focus();
+            if ($('.name').length === 6) {
+                $(this).hide();
+            }
+        });
+
+        $('.team-names').on('submit', function (e) {
+            e.preventDefault();
+            var teamNames = $('.team-names input[type="text"]').map(function (index, element) {
+                return $(element).val();
+            });
+
+            if (teamNames.length) {
+                createTeams(teamNames);
+                $('.game-setup').hide();
+                $('.scoreboard').toggle();
+            }
+        });
+
+        $('.scoring-buttons').on('click', '.btn', function () {
+            var teamNumber = $('.scoring-buttons-team').index($(this).parents('.scoring-buttons-team'));
+
+            if ($(this).hasClass('btn-success')) {
+                gameData.teams[teamNumber].score += $('.question-viewer').data('dollar-value');
+            } else {
+                gameData.teams[teamNumber].score -= $('.question-viewer').data('dollar-value');
+            }
+
+            $('.scoreboard-score').eq(teamNumber).text('$' + gameData.teams[teamNumber].score);
+
+            if (gameData.teams[teamNumber].score < 0) {
+                $('.scoreboard-score').eq(teamNumber).addClass('negative');
+            } else {
+                $('.scoreboard-score').eq(teamNumber).removClass('negative');
+            }
+
+            if ($(this).hasClass('btn-success')) {
+                $('.scoring-buttons').fadeOut(400, function () {
+                    $('.question-text').fadeOut(400, function () {
+                        $('.answer-text').fadeIn(400, function () {
+                            $('.question-viewer').addClass('done');
+                        });
+                    });
+                });
+            } else {
+                $(this).parents('.scoring-buttons-team').fadeOut(400, function () {
+                    if (!$(this).siblings().is(':visible').length) {
+                        $('.question-text').fadeOut(400, function () {
+                            $('.answer-text').fadeIn(400, function () {
+                                $('.question-viewer').addClass('done');
+                            });
+                        });
+                    }
+                });
+            }
+        });
+
+        $('.question-viewer').on('click', function () {
+            if ($(this).hasClass('done')) {
+                $('.bg-modal, .question-viewer').toggle();
+                $('.question-viewer').removeClass('done');
+                $('.question-text, .scoring-buttons, .scoring-buttons-team').fadeIn(0);
+                $('.answer-text').fadeOut(0);
+            }
+        });
+
+        // Scoreboard
+        $(document).keypress(function (key) {
+            if (key.which === 115 && $('.game-setup')[0].style.display === "none") {
+                $('.bg-modal, .scoreboard').toggle();
+            }
+        });
     });
-
-
-    // Greeting View
-
-    $('.addTeam').click(function(){
-    	$('.teamNames').append('<input type="text" class="name" maxlength="10">');
-    	$('.name:last-child').focus();
-    	if ($('.name').length === 6){
-    		$(this).hide();
-    	}
-    });
-
-    $('.makeTeams').click(function(){
-    	var teamNames = $('.name').map(function(team){
-    		if ($('.name')[team].value){
-	    		return $('.name')[team].value;
-    		}
-    	});
-    	if (teamNames.length){
-	    	createTeams(teamNames);
-	    	$('.preGame').hide();
-	    	$('.scoreboard').toggle();
-    	}
-    });
-
-
-    // Scoreboard
-
-	$(document).keypress(function(key){
-		if (key.which === 115 && $('.preGame')[0].style.display === "none"){
-			$('.scoreboard').toggle();
-		}
-	})
-
-    var fonts = [
-	  "'Indie Flower', cursive",
-	  "'Shadows Into Light', cursive",
-	  "'Pacifico', cursive",
-	  "'Amatic SC', cursive",
-	  "'Architects Daughter', cursive",
-	  "'Gloria Hallelujah', cursive",
-	  "'Covered By Your Grace', cursive",
-	  "'Kaushan Script', cursive",
-	  "'Coming Soon', cursive",
-	  "'Shadows Into Light Two', cursive"
-	]
-
-	var teamIcons = ['bluetoy.png', 'firetoy.png', 'greentoy.png', 'lilastoy.png', 'masktoy.png', 'orangetoy.png', 'pinktoy.png', 'redtoy.png', 'toothtoy.png', 'yellowtoy.png']
-
-    function randomize(arr){
-		var current = Math.floor(Math.random()*arr.length);
-		var chosen = arr[current];
-		arr.splice(current, 1);
-		return chosen;
-	};
-
-	function createTeams(arr){
-		for (var x = 0; x < arr.length; x++){
-			var teamObj = {
-				name: arr[x],
-				score: 0,
-			};
-			gameData.teams.push(teamObj);
-			$('.avatars').append('<td><img src="images/' +randomize(teamIcons)+ '" title='+ arr[x] +'></td>')
-			$('.scores').append('<td>'+teamObj.score+'</td>')
-			var teamName = $('<td>' + arr[x] + '</td>').css('font-family', randomize(fonts));
-			$('.teams').append(teamName);
-		}
-	}
-
-
-});
-
-
-
-
-
+}());
