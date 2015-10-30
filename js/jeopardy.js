@@ -74,7 +74,12 @@
 
         $('.game-board td').each(function () {
             var dollarValue = ($('.game-board > tbody > tr').index($(this).parent()) + 1) * gameData.valueMultiplier * 200;
-            $(this).children('.value').text('$' + dollarValue);
+
+            if (!$(this).children('.value').length) {
+                $(this).prepend('<span class="value">$' + dollarValue + '</span>');
+            } else {
+                $(this).children('.value').text('$' + dollarValue);
+            }
 
             $(this).on('click', function () {
                 var questionText = $(this).children('.question').text();
