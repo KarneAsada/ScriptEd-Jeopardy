@@ -65,10 +65,10 @@
 
                 $('.scoreboard-teams').append(teamHTML);
 
-                teamHTML = $('<div class="scoring-buttons-team"></div>');
-                teamHTML.append('<div class="scoring-buttons-name">' + teamNames[x] + '</div>');
+                teamHTML = $('<div class="clue-actions-team"></div>');
+                teamHTML.append('<div class="clue-actions-name">' + teamNames[x] + '</div>');
                 teamHTML.append('<div class="btn-group" role="group"><button type="button" class="btn btn-success" title="Right!"><span class="glyphicon glyphicon-ok"></span></button><button type="button" class="btn btn-danger" title="Wrong!"><span class="glyphicon glyphicon-remove"></span></button></div>');
-                $('.question-viewer .scoring-buttons').append(teamHTML);
+                $('.clue-viewer .clue-actions').append(teamHTML);
             }
         };
 
@@ -82,10 +82,10 @@
 
                 $(this).children('.value').hide();
                 $('.bg-modal').show();
-                $('.question-viewer .question-text').text(questionText);
-                $('.question-viewer .answer-text').html('Answer:<br>' + answerText);
-                $('.question-viewer').data('dollar-value', dollarValue);
-                $('.question-viewer').show();
+                $('.clue-viewer .question-text').text(questionText);
+                $('.clue-viewer .answer-text').html('Answer:<br>' + answerText);
+                $('.clue-viewer').data('dollar-value', dollarValue);
+                $('.clue-viewer').show();
 
                 $(this).addClass('asked').off('click');
             });
@@ -118,13 +118,13 @@
             }
         });
 
-        $('.scoring-buttons').on('click', '.btn', function () {
-            var teamNumber = $('.scoring-buttons-team').index($(this).parents('.scoring-buttons-team'));
+        $('.clue-actions').on('click', '.btn', function () {
+            var teamNumber = $('.clue-actions-team').index($(this).parents('.clue-actions-team'));
 
             if ($(this).hasClass('btn-success')) {
-                gameData.teams[teamNumber].score += $('.question-viewer').data('dollar-value');
+                gameData.teams[teamNumber].score += $('.clue-viewer').data('dollar-value');
             } else {
-                gameData.teams[teamNumber].score -= $('.question-viewer').data('dollar-value');
+                gameData.teams[teamNumber].score -= $('.clue-viewer').data('dollar-value');
             }
 
             $('.scoreboard-score').eq(teamNumber).text('$' + gameData.teams[teamNumber].score);
@@ -136,19 +136,19 @@
             }
 
             if ($(this).hasClass('btn-success')) {
-                $('.scoring-buttons').fadeOut(400, function () {
+                $('.clue-actions').fadeOut(400, function () {
                     $('.question-text').fadeOut(400, function () {
                         $('.answer-text').fadeIn(400, function () {
-                            $('.question-viewer').addClass('done');
+                            $('.clue-viewer').addClass('done');
                         });
                     });
                 });
             } else {
-                $(this).parents('.scoring-buttons-team').fadeOut(400, function () {
+                $(this).parents('.clue-actions-team').fadeOut(400, function () {
                     if (!$(this).siblings().is(':visible').length) {
                         $('.question-text').fadeOut(400, function () {
                             $('.answer-text').fadeIn(400, function () {
-                                $('.question-viewer').addClass('done');
+                                $('.clue-viewer').addClass('done');
                             });
                         });
                     }
@@ -156,11 +156,11 @@
             }
         });
 
-        $('.question-viewer').on('click', function () {
+        $('.clue-viewer').on('click', function () {
             if ($(this).hasClass('done')) {
-                $('.bg-modal, .question-viewer').toggle();
-                $('.question-viewer').removeClass('done');
-                $('.question-text, .scoring-buttons, .scoring-buttons-team').fadeIn(0);
+                $('.bg-modal, .clue-viewer').toggle();
+                $('.clue-viewer').removeClass('done');
+                $('.question-text, .clue-actions, .clue-actions-team').fadeIn(0);
                 $('.answer-text').fadeOut(0);
             }
         });

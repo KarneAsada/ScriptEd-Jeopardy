@@ -68,7 +68,7 @@ body,
 .question,
 .answer,
 .answer-text,
-.question-viewer,
+.clue-viewer,
 .scoreboard {
     display: none;
 }
@@ -80,7 +80,7 @@ body,
 
 .scoreboard,
 .game-setup,
-.question-viewer {
+.clue-viewer {
     position: absolute;
     top: 0;
     left: 0;
@@ -169,21 +169,21 @@ body,
 }
 
 /* question Viewer */
-.question-viewer {
+.clue-viewer {
     background-color: #00c;
     padding: 50px;
     padding-bottom: 114px; /* Height of scoring buttons */
 }
 
-.question-viewer .question-text,
-.question-viewer .answer-text {
+.clue-viewer .question-text,
+.clue-viewer .answer-text {
     font-family: Merriwether, Georgia, serif;
     color: #fff;
     font-size: 36px;
     text-align: center;
 }
 
-.scoring-buttons {
+.clue-actions {
     display: table;
     table-layout: fixed;
     position: absolute;
@@ -192,12 +192,12 @@ body,
     left: 0;
 }
 
-.scoring-buttons-team {
+.clue-actions-team {
     display: table-cell;
     text-align: center;
 }
 
-.scoring-buttons-name {
+.clue-actions-name {
     color: #fff;
     padding: 15px;
     font-size: 18px;
