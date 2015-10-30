@@ -145,7 +145,6 @@
                 });
             } else {
                 $(this).parents('.clue-actions-team').fadeOut(400, function () {
-                    console.log($(this).siblings().filter(':visible'));
                     if (!$(this).siblings().filter(':visible').length) {
                         $('.clue-question').fadeOut(400, function () {
                             $('.clue-answer').fadeIn(400, function () {
