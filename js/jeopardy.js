@@ -81,11 +81,11 @@
                 var answerText = $(this).children('.answer').text();
 
                 $(this).children('.value').hide();
-                $('.bg-modal').show();
                 $('.clue-viewer .clue-question').text(questionText);
                 $('.clue-viewer .clue-answer').html('Answer:<br>' + answerText);
                 $('.clue-viewer').data('dollar-value', dollarValue);
-                $('.clue-viewer').show();
+                $('.game-board').removeClass('ready');
+                $('.bg-modal, .clue-viewer').show();
 
                 $(this).addClass('asked').off('click');
             });
@@ -114,6 +114,7 @@
             if (teamNames.length) {
                 createTeams(teamNames);
                 $('.game-setup').hide();
+                $('.game-board').addClass('ready');
                 $('.scoreboard').toggle();
             }
         });
@@ -162,12 +163,13 @@
                 $('.clue-viewer').removeClass('done');
                 $('.clue-question, .clue-actions, .clue-actions-team').fadeIn(0);
                 $('.clue-answer').fadeOut(0);
+                $('.game-board').addClass('ready');
             }
         });
 
         // Scoreboard
         $(document).keypress(function (key) {
-            if (key.which === 115 && $('.game-setup')[0].style.display === "none") {
+            if (key.which === 115 && $('.game-board').hasClass('ready')) {
                 $('.bg-modal, .scoreboard').toggle();
             }
         });
