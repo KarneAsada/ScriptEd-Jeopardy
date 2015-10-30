@@ -46,6 +46,10 @@ body,
     border: 2px solid #000;
     text-align: center;
     vertical-align: middle;
+    border-radius: 10px;
+            box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.25) inset, 2px 2px 15px rgba(255, 255, 255, 0.25) inset;
+       -moz-box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.25) inset, 2px 2px 15px rgba(255, 255, 255, 0.25) inset;
+    -webkit-box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.25) inset, 2px 2px 15px rgba(255, 255, 255, 0.25) inset;
 }
 
 .game-board th {
