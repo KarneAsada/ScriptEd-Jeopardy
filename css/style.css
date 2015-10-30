@@ -102,18 +102,6 @@ body,
     text-align: center;
 }
 
-.add-team {
-    margin: auto;
-    border-radius: 15px;
-    background-color: #00c;
-    color: #fc0;
-    height: 25px;
-    width: 25px;
-    font-size: 15px;
-    line-height: 25px;
-    padding: 0;
-}
-
 /* Scoreboard */
 .scoreboard {
     color: #fff;
