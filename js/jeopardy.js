@@ -73,7 +73,7 @@
         };
 
         $('.game-board td').each(function () {
-            var dollarValue = ($('.game-board > tbody > tr').index($(this).parent()) + 1) * gameData.valueMultiplier * 100;
+            var dollarValue = ($('.game-board > tbody > tr').index($(this).parent()) + 1) * gameData.valueMultiplier * 200;
             $(this).children('.value').text('$' + dollarValue);
 
             $(this).on('click', function () {

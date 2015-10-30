@@ -36,12 +36,10 @@ body,
     width: 100%;
 }
 
-.game-board tr {
-    height: 16.666666666vh;
-}
-
 .game-board th,
 .game-board td {
+    height: 16.666666666vh;
+    width: 16.666666666%;
     background-color: #00c;
     border: 2px solid #000;
     text-align: center;
@@ -55,8 +53,10 @@ body,
 .game-board th {
     text-transform: uppercase;
     color: #fff;
-    font-size: 24px;
+    font-size: 3.5vh;
     cursor: not-allowed;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .game-board td:hover {
@@ -79,7 +79,7 @@ body,
 
 .value {
     color: #fc0;
-    font-size: 36px;
+    font-size: 7vh;
 }
 
 .scoreboard,
@@ -181,10 +181,12 @@ body,
 
 .clue-question,
 .clue-answer {
+    text-shadow: 2px 2px 0 #000;
     font-family: Merriweather, Georgia, serif;
     color: #fff;
     font-size: 36px;
     text-align: center;
+    text-transform: uppercase;
 }
 
 .clue-actions {
