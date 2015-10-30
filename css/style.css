@@ -38,6 +38,7 @@ body,
 
 .game-board th,
 .game-board td {
+    padding: 15px;
     height: 16.666666666vh;
     width: 16.666666666%;
     background-color: #00c;
