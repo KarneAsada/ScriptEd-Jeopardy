@@ -82,8 +82,8 @@
 
                 $(this).children('.value').hide();
                 $('.bg-modal').show();
-                $('.clue-viewer .question-text').text(questionText);
-                $('.clue-viewer .answer-text').html('Answer:<br>' + answerText);
+                $('.clue-viewer .clue-question').text(questionText);
+                $('.clue-viewer .clue-answer').html('Answer:<br>' + answerText);
                 $('.clue-viewer').data('dollar-value', dollarValue);
                 $('.clue-viewer').show();
 
@@ -137,17 +137,18 @@
 
             if ($(this).hasClass('btn-success')) {
                 $('.clue-actions').fadeOut(400, function () {
-                    $('.question-text').fadeOut(400, function () {
-                        $('.answer-text').fadeIn(400, function () {
+                    $('.clue-question').fadeOut(400, function () {
+                        $('.clue-answer').fadeIn(400, function () {
                             $('.clue-viewer').addClass('done');
                         });
                     });
                 });
             } else {
                 $(this).parents('.clue-actions-team').fadeOut(400, function () {
-                    if (!$(this).siblings().is(':visible').length) {
-                        $('.question-text').fadeOut(400, function () {
-                            $('.answer-text').fadeIn(400, function () {
+                    console.log($(this).siblings().filter(':visible'));
+                    if (!$(this).siblings().filter(':visible').length) {
+                        $('.clue-question').fadeOut(400, function () {
+                            $('.clue-answer').fadeIn(400, function () {
                                 $('.clue-viewer').addClass('done');
                             });
                         });
@@ -160,8 +161,8 @@
             if ($(this).hasClass('done')) {
                 $('.bg-modal, .clue-viewer').toggle();
                 $('.clue-viewer').removeClass('done');
-                $('.question-text, .clue-actions, .clue-actions-team').fadeIn(0);
-                $('.answer-text').fadeOut(0);
+                $('.clue-question, .clue-actions, .clue-actions-team').fadeIn(0);
+                $('.clue-answer').fadeOut(0);
             }
         });
 

@@ -1,6 +1,6 @@
 /*** TABLE OF CONTENTS ***
-	- Document
-	- Game Board
+    - Document
+    - Game Board
 *************************/
 
 /* Document */
@@ -61,15 +61,15 @@ body,
 }
 
 .game-board td.asked:hover {
-	border-color: #000;
-	cursor: not-allowed;
+    border-color: #000;
+    cursor: not-allowed;
 }
 
+.scoreboard,
 .question,
 .answer,
-.answer-text,
 .clue-viewer,
-.scoreboard {
+.clue-answer {
     display: none;
 }
 
@@ -159,7 +159,7 @@ body,
 }
 
 .scoreboard-score.negative {
-	color: #c00;
+    color: #c00;
 }
 
 .scoreboard h2 {
@@ -168,15 +168,15 @@ body,
     background-color: #000;
 }
 
-/* question Viewer */
+/* Clue Viewer */
 .clue-viewer {
     background-color: #00c;
     padding: 50px;
     padding-bottom: 114px; /* Height of scoring buttons */
 }
 
-.clue-viewer .question-text,
-.clue-viewer .answer-text {
+.clue-question,
+.clue-answer {
     font-family: Merriwether, Georgia, serif;
     color: #fff;
     font-size: 36px;
