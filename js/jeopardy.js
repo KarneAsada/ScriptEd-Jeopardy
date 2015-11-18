@@ -115,7 +115,7 @@
             $(this).before(formGroup);
 
             $('.game-setup form input[type="text"]').last().focus();
-            if ($('.game-setup .name').length === 6) {
+            if ($('.game-setup .form-control').length === 6) {
                 $(this).hide();
             }
         });
