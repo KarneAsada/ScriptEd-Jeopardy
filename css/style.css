@@ -35,41 +35,69 @@ body,
 
 .game-board {
     font-family: Oswald, Impact, 'Arial Black', sans-serif;
-    border-collapse: separate;
     text-shadow: 2px 2px 0 #000;
     width: 100%;
 }
 
-.game-board th,
-.game-board td {
-    padding: 15px;
-    height: 16.666666666vh;
+.game-board,
+.game-board ol {
+    padding: 0;
+    margin: 0;
+    display: block;
+    list-style-type: none;    
+}
+
+
+.game-board > li {
+    float: left;
     width: 16.666666666%;
+}
+
+.game-board div,
+.game-board ol li {
     background-color: #00c;
+    padding: 3.333333333vh 15px;
+    height: 16.666666666vh;
+    width: 100%;
     border: 2px solid #000;
     text-align: center;
-    vertical-align: middle;
     border-radius: 10px;
             box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.25) inset, 2px 2px 15px rgba(255, 255, 255, 0.25) inset;
        -moz-box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.25) inset, 2px 2px 15px rgba(255, 255, 255, 0.25) inset;
     -webkit-box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.25) inset, 2px 2px 15px rgba(255, 255, 255, 0.25) inset;
 }
 
-.game-board th {
+.game-board div span,
+.game-board .value {
+    display: block;
     text-transform: uppercase;
-    color: #fff;
-    font-size: 3.5vh;
-    cursor: not-allowed;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    max-height: 100%;
+    position: relative;
+    top: 50%;
+            transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
 
-.game-board td:hover {
+.game-board div span {
+    color: #fff;
+    font-size: 3.5vh;
+    line-height: 5vh;
+    cursor: not-allowed;
+    overflow: hidden;
+}
+
+.value {
+    color: #fc0;
+    font-size: 7vh;
+}
+
+.game-board ol li:hover {
     border-color: #fc0;
     cursor: pointer;
 }
 
-.game-board td.asked:hover {
+.game-board ol li.asked:hover {
     border-color: #000;
     cursor: not-allowed;
 }
@@ -83,10 +111,7 @@ body,
     display: none;
 }
 
-.value {
-    color: #fc0;
-    font-size: 7vh;
-}
+
 
 .scoreboard,
 .game-setup,

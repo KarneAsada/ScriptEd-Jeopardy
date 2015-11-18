@@ -1,0 +1,66 @@
+.bg-modal, .game-setup, .clue-viewer, .scoreboard, .value {
+	display: none;
+}
+
+.game-board {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.game-board div {
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-top: 1em;
+}
+
+.game-board li:first-child div {
+	margin-top: 0;
+}
+
+.game-board ol {
+	list-style-type: none;
+	counter-reset: dollar-value;
+	padding-left: 0;
+}
+
+.game-board ol li {
+	border-top: 1px solid #999;
+	padding-top: .5em;
+	margin-top: .5em;
+	counter-increment: dollar-value;
+	position: relative;
+	padding-left: 4em;
+	page-break-before: avoid;
+	page-break-after: avoid;
+	page-break-inside: avoid;
+}
+
+.game-board ol li:first-child {
+	border-top: none;
+	padding-top: none;
+	margin-top: none;
+}
+
+.game-board ol li:before {
+	content: 'Q' counter(dollar-value) ': ';
+	position: absolute;
+	left: 0;
+	width: 3em;
+	text-align: right;
+	top: .5em;
+	font-weight: bold;
+}
+
+.game-board ol li .question,
+.game-board ol li .answer {
+	display: block;
+}
+
+.game-board ol li .answer {
+	padding-left: 3em;
+	font-style: italic;
+}
+
+.game-board ol li .answer:before {
+	content: 'A: ';
+}
