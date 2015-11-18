@@ -272,30 +272,60 @@
             </tbody>
         </table>
 
+        <div class="bg-modal"></div>
+
         <div class="game-setup">
             <h1>Enter Player/Team Names:</h1>
-            <form class="team-names">
-                <div class="form-group">
-                    <input type="text" class="form-control" maxlength="10" title="Player/Team Name" placeholder="Player/Team Name">
+            <div class="row">
+                <div class="col-sm-6 center-block">
+                    <form action="#">
+                        <div class="form-group">
+                            <input type="text" class="form-control" maxlength="10" title="Player/Team Name" placeholder="Player/Team Name">
+                        </div>
+                        <button class="add-team btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Player/Team</button>
+                        <input type="submit" value="Let's Play!" class="btn btn-primary">
+                    </form>
                 </div>
-                <button class="add-team btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Player/Team</button>
-                <input type="submit" value="Let's Play!" class="btn btn-primary">
-            </form>
+            </div>
         </div>
 
         <div class="scoreboard">
-            <div class="scoreboard-teams">
-            </div>
+            <div class="scoreboard-teams"></div>
             <h2 class="text-center">Press <kbd>s</kbd> to hide/show scoreboard.</h2>
         </div>
-
-        <div class="bg-modal"></div>
     
         <div class="clue-viewer">
             <div class="clue-question"></div>
             <div class="clue-answer"></div>
+            <div class="clue-close">
+                <button class="btn btn-primary">Back to game board</button>
+            </div>
             <div class="clue-actions"></div>
         </div>
+
+        <script id="template-team-scoreboard" type="text/template">
+            <div class="scoreboard-team">
+                <div class="scoreboard-avatar">
+                    <img src="img/avatar.png" alt="Player/Team Name">
+                </div>
+                <div class="scoreboard-score">$0</div>
+                <div class="scoreboard-name"></div>
+            </div>
+        </script>
+
+        <script id="template-team-clue-viewer" type="text/template">
+            <div class="clue-actions-team">
+                <div class="clue-actions-name">Player/Team Name</div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-success" title="Right!">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger" title="Wrong!">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+            </div>
+        </script>
 
         <script src="js/jquery.js"></script>
         <script src="js/jeopardy.js"></script>

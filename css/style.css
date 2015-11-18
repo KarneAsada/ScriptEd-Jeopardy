@@ -22,6 +22,10 @@ body {
     z-index: 2;
 }
 
+.center-block {
+    float: none;
+}
+
 /* Game Board */
 html,
 body,
@@ -74,7 +78,8 @@ body,
 .question,
 .answer,
 .clue-viewer,
-.clue-answer {
+.clue-answer,
+.clue-close {
     display: none;
 }
 
@@ -176,6 +181,11 @@ body,
     font-size: 36px;
     text-align: center;
     text-transform: uppercase;
+}
+
+.clue-close {
+    margin: 20px 0;
+    text-align: center;
 }
 
 .clue-actions {

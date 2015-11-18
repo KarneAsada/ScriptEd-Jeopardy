@@ -44,32 +44,39 @@
             var teamHTML;
 
             for (x = 0; x < teamNames.length; x += 1) {
-
                 gameData.teams.push({
                     name: teamNames[x],
                     score: 0
                 });
 
-                teamHTML = $('<div class="scoreboard-team"></div>');
+                teamHTML = $($('#template-team-scoreboard').html());
 
-                teamHTML.append(
-                    '<div class="scoreboard-avatar"><img src="img/'
-                        + getRandomArrayElement(teamStyles.avatars)
-                        + '" alt="' + teamNames[x] + '"></div>'
-                );
-                teamHTML.append('<div class="scoreboard-score">$0</div>');
-                teamHTML.append(
-                    $('<div class="scoreboard-name">' + teamNames[x] + '</div>')
-                        .css('font-family', getRandomArrayElement(teamStyles.fonts))
-                );
+                teamHTML.find('.scoreboard-avatar img').attr({
+                    src: 'img/' + getRandomArrayElement(teamStyles.avatars),
+                    alt: teamNames[x]
+                });
+
+                teamHTML.find('.scoreboard-name')
+                    .text(teamNames[x])
+                    .css('font-family', getRandomArrayElement(teamStyles.fonts));
 
                 $('.scoreboard-teams').append(teamHTML);
 
-                teamHTML = $('<div class="clue-actions-team"></div>');
-                teamHTML.append('<div class="clue-actions-name">' + teamNames[x] + '</div>');
-                teamHTML.append('<div class="btn-group" role="group"><button type="button" class="btn btn-success" title="Right!"><span class="glyphicon glyphicon-ok"></span></button><button type="button" class="btn btn-danger" title="Wrong!"><span class="glyphicon glyphicon-remove"></span></button></div>');
+                teamHTML = $($('#template-team-clue-viewer').html());
+
+                teamHTML.find('clue-actions-name').text(teamNames[x]);
                 $('.clue-viewer .clue-actions').append(teamHTML);
             }
+        };
+
+        var showAnswer = function () {
+            $('.clue-actions').fadeOut(400, function () {
+                $('.clue-question').fadeOut(400, function () {
+                    $('.clue-answer').fadeIn(400, function () {
+                        $('.clue-close').fadeIn();
+                    });
+                });
+            });
         };
 
         $('.game-board td').each(function () {
@@ -86,8 +93,8 @@
                 var answerText = $(this).children('.answer').text();
 
                 $(this).children('.value').hide();
-                $('.clue-viewer .clue-question').text(questionText);
-                $('.clue-viewer .clue-answer').html('Answer:<br>' + answerText);
+                $('.clue-question').text(questionText);
+                $('.clue-answer').html('Answer:<br>' + answerText);
                 $('.clue-viewer').data('dollar-value', dollarValue);
                 $('.game-board').removeClass('ready');
                 $('.bg-modal, .clue-viewer').show();
@@ -104,15 +111,15 @@
             formGroup.find('input').val('');
             $(this).before(formGroup);
 
-            $('.team-names input').last().focus();
-            if ($('.name').length === 6) {
+            $('.game-setup form input[type="text"]').last().focus();
+            if ($('.game-setup .name').length === 6) {
                 $(this).hide();
             }
         });
 
-        $('.team-names').on('submit', function (e) {
+        $('.game-setup form').on('submit', function (e) {
             e.preventDefault();
-            var teamNames = $('.team-names input[type="text"]').map(function (index, element) {
+            var teamNames = $(this).find('input[type="text"]').map(function (index, element) {
                 if (element.value) {
                     return element.value;
                 }
@@ -135,28 +142,24 @@
                 gameData.teams[teamNumber].score -= $('.clue-viewer').data('dollar-value');
             }
 
-            $('.scoreboard-score').eq(teamNumber).text('$' + gameData.teams[teamNumber].score);
-
             if (gameData.teams[teamNumber].score < 0) {
-                $('.scoreboard-score').eq(teamNumber).addClass('negative');
+                $('.scoreboard-score').eq(teamNumber)
+                    .addClass('negative')
+                    .text('-$' + Math.abs(gameData.teams[teamNumber].score));
             } else {
-                $('.scoreboard-score').eq(teamNumber).removeClass('negative');
+                $('.scoreboard-score').eq(teamNumber)
+                    .removeClass('negative')
+                    .text('$' + gameData.teams[teamNumber].score);
             }
 
             if ($(this).hasClass('btn-success')) {
-                $('.clue-actions').fadeOut(400, function () {
-                    $('.clue-question').fadeOut(400, function () {
-                        $('.clue-answer').fadeIn(400, function () {
-                            $('.clue-viewer').addClass('done');
-                        });
-                    });
-                });
+                showAnswer();
             } else {
                 $(this).parents('.clue-actions-team').fadeOut(400, function () {
                     if (!$(this).siblings().filter(':visible').length) {
                         $('.clue-question').fadeOut(400, function () {
                             $('.clue-answer').fadeIn(400, function () {
-                                $('.clue-viewer').addClass('done');
+                                $('.clue-close').fadeIn();
                             });
                         });
                     }
@@ -164,20 +167,22 @@
             }
         });
 
-        $('.clue-viewer').on('click', function () {
-            if ($(this).hasClass('done')) {
-                $('.bg-modal, .clue-viewer').toggle();
-                $('.clue-viewer').removeClass('done');
-                $('.clue-question, .clue-actions, .clue-actions-team').fadeIn(0);
-                $('.clue-answer').fadeOut(0);
-                $('.game-board').addClass('ready');
-            }
+        $('.clue-close button').on('click', function () {
+            $('.bg-modal, .clue-viewer').toggle();
+            $('.clue-viewer').removeClass('done');
+            $('.clue-question, .clue-actions, .clue-actions-team').fadeIn(0);
+            $('.clue-answer').fadeOut(0);
+            $('.game-board').addClass('ready');
         });
 
         // Scoreboard
-        $(document).keypress(function (key) {
+        $(document).on('keypress', function (key) {
             if (key.which === 115 && $('.game-board').hasClass('ready')) {
                 $('.bg-modal, .scoreboard').toggle();
+            }
+
+            if (key.which === 120 && $('.clue-viewer').filter(':visible')) {
+                showAnswer();
             }
         });
     });
