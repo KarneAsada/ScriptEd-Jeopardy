@@ -79,14 +79,16 @@
             });
         };
 
-        $('.game-board td').each(function () {
-            var dollarValue = ($('.game-board > tbody > tr').index($(this).parent()) + 1) * gameData.valueMultiplier * 200;
+        $('.game-board ol li').each(function () {
+            var dollarValue = ($(this).index() + 1) * gameData.valueMultiplier * 200;
 
             if (!$(this).children('.value').length) {
                 $(this).prepend('<span class="value">$' + dollarValue + '</span>');
             } else {
                 $(this).children('.value').text('$' + dollarValue);
             }
+
+            $(this).attr('data-dollar-value', dollarValue);
 
             $(this).on('click', function () {
                 var questionText = $(this).children('.question').text();
@@ -97,6 +99,7 @@
                 $('.clue-answer').html('Answer:<br>' + answerText);
                 $('.clue-viewer').data('dollar-value', dollarValue);
                 $('.game-board').removeClass('ready');
+                $('.clue-close').hide();
                 $('.bg-modal, .clue-viewer').show();
 
                 $(this).addClass('asked').off('click');
