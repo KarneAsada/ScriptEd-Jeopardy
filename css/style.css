@@ -1,52 +1,73 @@
 /*** TABLE OF CONTENTS ***
-    - Document
-    - Game Board
+    * Document
+    * Game Board
+    * Modals (Something that pops up and takes up the whole screen)
+        * Game Setup
+        * Scoreboard
+        * Clue Viewer
+
+If you see a CSS property you don't recognize, Google it! We've added comments
+about things that are more complicated than just using a new CSS property.
 *************************/
 
 /* Document */
 body {
-    background-color: #000;
+    /*
+        For some CSS properties (like user-select), you need to use different
+        variations of it to make sure it works in all the different browsers.
+    */
     -webkit-user-select: none;
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
+    background-color: #000;
 }
 
 .bg-modal {
+    /*
+        If you position something absolutely, and set the position of all four
+        corners to zero, it will stretch it across the entire screen.
+    */
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
+/*
+    This class is included in Bootstrap, setting float to none allows whatever
+    has this class to be centered, even if we use it on a div within a .row.
+*/
 .center-block {
     float: none;
 }
 
 /* Game Board */
-html,
-body,
 .game-board {
-    height: 100%;
-}
-
-.game-board {
+    /*
+        Whenever you're using webfonts or non-standard fonts, make sure to add
+        some similar fonts as backup, in case the webfont can't be loaded, or the user
+        doesn't have the font you're trying to use.
+    */
     font-family: Oswald, Impact, 'Arial Black', sans-serif;
-    text-shadow: 2px 2px 0 #000;
     width: 100%;
+    text-shadow: 2px 2px 0 #000;
 }
 
 .game-board,
 .game-board ol {
-    padding: 0;
-    margin: 0;
+    /*
+        Remove the padding and margin that are normally on lists, plus set the
+        list-style-type to none so there aren't any bullet points or numbers.
+    */
     display: block;
-    list-style-type: none;    
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
-
 
 .game-board > li {
     float: left;
@@ -55,53 +76,71 @@ body,
 
 .game-board div,
 .game-board ol li {
-    background-color: #00c;
-    padding: 3.333333333vh 15px;
+    /*
+        Height and vertical padding are set with vh units...but what's that?
+        See https://developer.mozilla.org/en-US/docs/Web/CSS/length#Viewport-percentage_lengths
+    */
+    display: block;
     height: 16.666666666vh;
-    width: 100%;
-    border: 2px solid #000;
+    padding: 3.333333333vh 15px;
     text-align: center;
+    border: 2px solid #000;
     border-radius: 10px;
-            box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.25) inset, 2px 2px 15px rgba(255, 255, 255, 0.25) inset;
-       -moz-box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.25) inset, 2px 2px 15px rgba(255, 255, 255, 0.25) inset;
+    background-color: #00c;
+    /* Learn more about box shadows: https://css-tricks.com/snippets/css/css-box-shadow/ */
     -webkit-box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.25) inset, 2px 2px 15px rgba(255, 255, 255, 0.25) inset;
+       -moz-box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.25) inset, 2px 2px 15px rgba(255, 255, 255, 0.25) inset;
+            box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.25) inset, 2px 2px 15px rgba(255, 255, 255, 0.25) inset;
 }
 
 .game-board div span,
 .game-board .value {
-    display: block;
-    text-transform: uppercase;
-    max-height: 100%;
+    /*
+        The CSS properties position, top, and transform combine to center these
+        elements vertically inside their container.
+        See http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
+    */
     position: relative;
     top: 50%;
-            transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
+    display: block;
+    max-height: 100%;
     -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    text-transform: uppercase;
 }
 
 .game-board div span {
-    color: #fff;
+    /*
+        Setting the cursor to not-allowed will help the user recognize not to
+        click on the category names.
+    */
     font-size: 3.5vh;
     line-height: 5vh;
     cursor: not-allowed;
-    overflow: hidden;
+    color: #fff;
 }
 
 .value {
-    color: #fc0;
     font-size: 7vh;
+    color: #fc0;
 }
 
 .game-board ol li:hover {
-    border-color: #fc0;
+    /*
+        Setting the cursor to pointer will make this look like a link, even
+        though it's not really one.
+    */
     cursor: pointer;
+    border-color: #fc0;
 }
 
 .game-board ol li.asked:hover {
-    border-color: #000;
     cursor: not-allowed;
+    border-color: #000;
 }
 
+/* A bunch of things that we don't want showing until we need them... */
 .scoreboard,
 .question,
 .answer,
@@ -111,41 +150,51 @@ body,
     display: none;
 }
 
-
-
+/* Modals */
 .scoreboard,
 .game-setup,
 .clue-viewer {
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
     z-index: 3;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     margin: 15vh 10vw;
 }
 
+/* Modals > Game Setup */
 .game-setup {
     padding: 15px;
-    background-color: #000;
-    color: #fff;
     text-align: center;
+    color: #fff;
+    background-color: #000;
 }
 
-/* Scoreboard */
+/* Modals > Scoreboard */
 .scoreboard {
     color: #fff;
 }
 
 .scoreboard-teams {
+    /*
+        Even though this is a div, by setting display to table we can make it
+        work like a <table> instead. Setting table-layout to fixed means all of
+        the cells in the table will split the width of the table evenly, no
+        matter how many cells there are or what's in them. 
+    */
     display: table;
     width: 100%;
     table-layout: fixed;
 }
 
 .scoreboard-team {
-    text-align: center;
+    /*
+        By setting display here to table-cell, these divs will be the cells
+        inside the pretend table we created above.
+    */
     display: table-cell;
+    text-align: center;
     /* Gradient background generated by http://colorzilla.com/gradient-editor/ */
     background: #92e5fc;
     background:    -moz-linear-gradient(top,  #92e5fc 0%, #20278c 100%);
@@ -154,6 +203,7 @@ body,
     background:      -o-linear-gradient(top,  #92e5fc 0%,#20278c 100%);
     background:     -ms-linear-gradient(top,  #92e5fc 0%,#20278c 100%);
     background:         linear-gradient(to bottom, #92e5fc 0%, #20278c 100%);
+
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#92e5fc', endColorstr='#20278c', GradientType=0);
     /* End gradient background */
 }
@@ -169,15 +219,15 @@ body,
 
 .scoreboard-score,
 .scoreboard-name {
-    border: 5px solid #000;
-    padding: 25px;
     font-size: 24px;
     line-height: 24px;
+    padding: 25px;
+    border: 5px solid #000;
 }
 
 .scoreboard-score {
-    border-top-color: #fff;
     font-family: Oswald, Impact, 'Arial Black', sans-serif;
+    border-top-color: #fff;
     border-bottom: none;
 }
 
@@ -191,21 +241,25 @@ body,
     background-color: #000;
 }
 
-/* Clue Viewer */
+/* Modals > Clue Viewer */
 .clue-viewer {
-    background-color: #00c;
+    /*
+        The bottom padding is set to 114px because that's exactly how much
+        space we should need to show the .clue-actions div.
+    */
     padding: 50px;
-    padding-bottom: 114px; /* Height of scoring buttons */
+    padding-bottom: 114px;
+    background-color: #00c;
 }
 
 .clue-question,
 .clue-answer {
-    text-shadow: 2px 2px 0 #000;
     font-family: Merriweather, Georgia, serif;
-    color: #fff;
     font-size: 36px;
     text-align: center;
     text-transform: uppercase;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
 }
 
 .clue-close {
@@ -214,12 +268,12 @@ body,
 }
 
 .clue-actions {
-    display: table;
-    table-layout: fixed;
     position: absolute;
-    width: 100%;
     bottom: 25px;
     left: 0;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 
 .clue-actions-team {
@@ -228,9 +282,9 @@ body,
 }
 
 .clue-actions-name {
-    color: #fff;
-    padding: 15px;
-    font-size: 18px;
     font-family: Oswald, Impact, 'Arial Black', sans-serif;
+    font-size: 18px;
+    padding: 15px;
+    color: #fff;
     text-shadow: 1px 1px 0 #000;
 }

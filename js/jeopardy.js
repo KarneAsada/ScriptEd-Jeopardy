@@ -10,16 +10,16 @@
 
         var teamStyles = {
             fonts: [
-                "'Indie Flower', cursive",
-                "'Shadows Into Light', cursive",
-                "'Pacifico', cursive",
-                "'Amatic SC', cursive",
-                "'Architects Daughter', cursive",
-                "'Gloria Hallelujah', cursive",
-                "'Covered By Your Grace', cursive",
-                "'Kaushan Script', cursive",
-                "'Coming Soon', cursive",
-                "'Shadows Into Light Two', cursive"
+                'Indie Flower',
+                'Shadows Into Light',
+                'Pacifico',
+                'Amatic SC',
+                'Architects Daughter',
+                'Gloria Hallelujah',
+                'Covered By Your Grace',
+                'Kaushan Script',
+                'Coming Soon',
+                'Shadows Into Light Two'
             ],
             avatars: [
                 'bluetoy.png',
@@ -42,6 +42,8 @@
         var createTeams = function (teamNames) {
             var x;
             var teamHTML;
+            var font;
+            var fontCSS;
 
             for (x = 0; x < teamNames.length; x += 1) {
                 gameData.teams.push({
@@ -56,9 +58,13 @@
                     alt: teamNames[x]
                 });
 
+                font = getRandomArrayElement(teamStyles.fonts);
                 teamHTML.find('.scoreboard-name')
                     .text(teamNames[x])
-                    .css('font-family', getRandomArrayElement(teamStyles.fonts));
+                    .css('font-family', "'" + font + "', cursive");
+
+                fontCSS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=' + font.replace(' ', '+') + '">';
+                $('title').after(fontCSS);
 
                 $('.scoreboard-teams').append(teamHTML);
 
