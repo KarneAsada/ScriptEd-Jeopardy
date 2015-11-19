@@ -165,7 +165,6 @@
 
                 Specifically, we're getting the previous element (one of the
                 existing team name fields) and making a copy of it.
-                copt
             */
             var formGroup = $(this).prev().clone();
 
