@@ -237,7 +237,7 @@
                 If there's already an element with the class "value", just update
                 the text inside it. Otherwise add the element, including the text.
             */
-            if (!$(this).find('.value').length) {
+            if ($(this).find('.value').length) {
                 $(this).find('.value').text('$' + dollarValue);
             } else {
                 $(this).prepend('<span class="value">$' + dollarValue + '</span>');
