@@ -313,6 +313,13 @@
             <div class="clue-actions"></div>
         </div>
 
+        <!--
+            These next two script tags have their type attribute set to
+            text/template so that the browser knows the stuff inside isn't
+            JavaScript, and it won't try to run it or anything. We can use the
+            HTML inside these <script> tags as a basis for adding teams to the
+            page later on.
+        -->
         <script id="template-team-scoreboard" type="text/template">
             <div class="scoreboard-team">
                 <div class="scoreboard-avatar">
