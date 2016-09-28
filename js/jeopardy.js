@@ -157,6 +157,13 @@
         };
 
         // Game Setup
+
+        // Populate questions
+        var boardTemplate = $('#template-jeopardy-board').html();
+        Mustache.parse(boardTemplate);
+        var boardRendered = Mustache.render(boardTemplate, boardData);
+        $('.game-board').html(boardRendered);
+
         $('.add-team').on('click', function () {
             /*
                 "this" in this case means the element that is being clicked on.
