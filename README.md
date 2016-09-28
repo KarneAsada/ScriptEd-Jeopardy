@@ -1,7 +1,4 @@
 # ScriptEd-Jeopardy
 
-Built using HTML, CSS, JavaScript and jQuery.
-
-By the end of the year, ScriptEd students in the beginner class will have all the skills used to build this project.
-
-Try it out [here](https://fantasticole.github.io/ScriptEd-Jeopardy/).
+A simple modification of https://github.com/fantasticole/ScriptEd-Jeopardy
+to use a json doc to populate the jeopardy board
